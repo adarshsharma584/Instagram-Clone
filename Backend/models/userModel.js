@@ -23,19 +23,19 @@ const userSchema = new Schema({
     password:{
         type:String,
         required:true,
-        select:false,
     },
+        
     profilePhoto: {
         type: String,
         default:""
     },
     avatar:{
         type: String,
-        defualt:"",
+        default:"",
     },
     bio:{
         type: String,
-        defualt:"",
+        default:"",
     },
     followers: [{
     type: mongoose.Schema.Types.ObjectId,
@@ -66,6 +66,10 @@ const userSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref:"Story",
     },
+    refreshToken:{
+        type: String,
+    },
+
     createdAt: {
     type: Date,
     default: Date.now
@@ -75,19 +79,20 @@ const userSchema = new Schema({
     { timestamps: true }
 );
 
-userSchema.pre("save", function (next) {
-    if (this.isModified("password")) {
-        this.password = bcrypt.hashSync(this.password, 10);
-    }
+userSchema.pre("save", async function (next) {
+    if (!this.isModified("password")) return next();
+        
+    const hashedPassword =  await bcrypt.hash(this.password, 10);
+    this.password = hashedPassword;
     next();
 });
 
-userSchema.methods.comparePassword = function(password){
-    return bcrypt.compareSync(password, this.password);
+userSchema.methods.comparePassword = async function(password){
+    return  await bcrypt.compare(password, this.password);
 }
 
-userSchema.methods.generateAccessToken = async function () {
-    const accessToken = await jwt.sign({
+userSchema.methods.generateAccessToken =  function(){
+    const accessToken = jwt.sign({
         _id: this._id,
         username:this.username,
         name:this.name,
