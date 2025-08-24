@@ -45,35 +45,26 @@ const userSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   }],
-    likes:{
+  posts: [{
         type: Schema.Types.ObjectId,
         ref:"Post",
-    },
-    posts: {
+  }],
+    savedPosts:[{
         type: Schema.Types.ObjectId,
         ref:"Post",
-    },
-    savedPosts:{
-        type: Schema.Types.ObjectId,
-        ref:"Post",
-    },
-    reels: {
+  }],
+    reels: [{
         type: Schema.Types.ObjectId,
         ref:"Reel",
 
-    },
-    stories: {
+  }],
+    stories: [{
         type: Schema.Types.ObjectId,
         ref:"Story",
-    },
+  }],
     refreshToken:{
         type: String,
     },
-
-    createdAt: {
-    type: Date,
-    default: Date.now
-  }
 
 },
     { timestamps: true }
@@ -103,8 +94,8 @@ userSchema.methods.generateAccessToken =  function(){
     return accessToken;
 };
 
-userSchema.methods.generateRefreshToken = async function () {
-    const refreshToken = await jwt.sign({
+userSchema.methods.generateRefreshToken = function () {
+    const refreshToken = jwt.sign({
         _id: this._id,
     },
         process.env.REFRESH_TOKEN_SECRET,
