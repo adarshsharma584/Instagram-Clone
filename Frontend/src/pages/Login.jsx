@@ -1,7 +1,7 @@
 import React from 'react'
 import { FaFacebook } from "react-icons/fa";
 
-function LoginForm() {
+function Login() {
   return (
     <>
       <div className="login-form h-full w-full flex flex-col items-center justify-center">
@@ -57,4 +57,4 @@ function LoginForm() {
   );
 }
 
-export default LoginForm
+export default Login;

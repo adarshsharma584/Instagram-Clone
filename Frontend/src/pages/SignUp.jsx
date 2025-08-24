@@ -1,6 +1,7 @@
 import React from 'react'
-import LoginForm from './LoginForm.jsx'
-function Auht() {
+import LoginForm from './Login.jsx'
+
+function SignUp() {
   return (
     <>
       <div className="h-screen w-screen bg-black text-white flex ">
@@ -19,4 +20,4 @@ function Auht() {
   );
 }
 
-export default Auht
+export default SignUp;

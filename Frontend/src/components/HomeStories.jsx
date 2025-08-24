@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Stories() {
+function HomeStories() {
   return (
     <>
      <div className =' flex-col items-center gap-1 my-4'>
@@ -13,4 +13,4 @@ function Stories() {
   );
 }
 
-export default Stories
+export default HomeStories

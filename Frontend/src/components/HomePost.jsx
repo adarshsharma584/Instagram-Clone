@@ -3,7 +3,8 @@ import { FaRegHeart } from "react-icons/fa";
 import { LuSend } from "react-icons/lu";
 import { FaRegCommentDots } from "react-icons/fa";
 import { MdOutlineSaveAlt } from "react-icons/md";
-function Post({src}) {
+
+function HomePost({src}) {
   return (
     <>
       <div className="post-container h-[425px] w-full my-2 bg-black  flex flex-col justify-start items-center">
@@ -52,4 +53,4 @@ function Post({src}) {
   );
 }
 
-export default Post;
+export default HomePost;
